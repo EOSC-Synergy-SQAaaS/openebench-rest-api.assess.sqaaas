@@ -1,0 +1,56 @@
+config:
+  credentials: []
+  project_repos:
+    github.com/EOSC-synergy/sqaaas-tooling:
+      branch: release/1.7.4
+      repo: https://github.com/EOSC-synergy/sqaaas-tooling
+    gitlab.bsc.es/inb/elixir/openebench/openebench-rest-api:
+      branch: master
+      repo: https://gitlab.bsc.es/inb/elixir/openebench/openebench-rest-api
+environment:
+  JPL_DOCKERFORCEBUILD: enabled
+  JPL_KEEPGOING: enabled
+sqa_criteria:
+  QC.Acc:
+    repos:
+      gitlab.bsc.es/inb/elixir/openebench/openebench-rest-api git:
+        commands:
+        - /usr/bin/env sh .sqa/script.clammy-linen-burmese.sh
+        container: qc.acc_sunny-wheat-salamander
+  QC.Doc:
+    repos:
+      gitlab.bsc.es/inb/elixir/openebench/openebench-rest-api find_doc_files.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.surly-seashell-ibis.sh
+        container: qc.doc_squirrely-olive-owl
+      gitlab.bsc.es/inb/elixir/openebench/openebench-rest-api git:
+        commands:
+        - /usr/bin/env sh .sqa/script.jumpy-mauve-beaver.sh
+        container: qc.doc_wimpy-chestnut-duck
+      gitlab.bsc.es/inb/elixir/openebench/openebench-rest-api markdownlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.slaphappy-champagne-shrew.sh
+        container: qc.doc_randy-black-hedgehog
+  QC.Lic:
+    repos:
+      gitlab.bsc.es/inb/elixir/openebench/openebench-rest-api licensee:
+        commands:
+        - /usr/bin/env sh .sqa/script.sleepy-teal-labradoodle.sh
+        container: qc.lic_stealthy-crimson-hornet
+  QC.Sty:
+    repos:
+      gitlab.bsc.es/inb/elixir/openebench/openebench-rest-api checkstyle:
+        commands:
+        - /usr/bin/env sh .sqa/script.sleepy-harlequin-fowl.sh
+        container: qc.sty_dorky-myrtle-bird
+      gitlab.bsc.es/inb/elixir/openebench/openebench-rest-api jsonlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.muzzy-orchid-affenpinscher.sh
+        container: qc.sty_ugly-ecru-robin
+  QC.Ver:
+    repos:
+      gitlab.bsc.es/inb/elixir/openebench/openebench-rest-api get_git_tags.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.cloudy-purple-duck.sh
+        container: qc.ver_sleepy-platinum-caterpillar
+timeout: 1800
